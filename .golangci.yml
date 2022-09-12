@@ -1,0 +1,70 @@
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+  govet:
+    check-shadowing: false
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - exportloopref
+    - exhaustive
+    - goconst
+    - goimports
+    - gomnd
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - prealloc
+    - predeclared
+    - revive
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - varcheck
+    - wastedassign
+
+run:
+  issues-exit-code: 1
+
+issues:
+  exclude-rules:
+    - path: _test\.go # disable some linters on test files
+      linters:
+        - bodyclose
+        - dupl
+        - gocyclo
+        - gosec
+    - path: application/mapper/.*_test_data\.go # ignore spelling errors in the XML
+      linters:
+        - misspell
+    - path: util/format_numbers.go # ignore magic numbers used in strconv.FormatFloat(), parseFormat() and RenderFloat()
+      linters:
+        - gomnd
